@@ -6,7 +6,6 @@ let player = {
   y: 300,
   width: 30,
   height: 30,
-  color: "#ff66b2",
   velocityY: 0,
   jumpForce: 12,
   grounded: false
@@ -16,6 +15,10 @@ let gravity = 0.5;
 let obstacles = [];
 let frame = 0;
 let score = 0;
+let gameOvered = false;
+
+// Zvuk skoku
+const jumpSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_841174d841.mp3?filename=jump-144026.mp3");
 
 function drawHeart(x, y) {
   ctx.fillStyle = "#ff4da6";
@@ -54,18 +57,15 @@ function updateObstacles() {
     let obs = obstacles[i];
     obs.x -= 5;
 
-    // Detekce kolize
     if (
       player.x < obs.x + obs.width &&
       player.x + player.width > obs.x &&
       player.y < obs.y + obs.height &&
       player.y + player.height > obs.y
     ) {
-      alert("Prohrála jsi! Obnov stránku pro novou hru.");
-      document.location.reload();
+      triggerGameOver();
     }
 
-    // Započítání skóre
     if (!obs.passed && obs.x + obs.width < player.x) {
       obs.passed = true;
       score++;
@@ -81,37 +81,70 @@ function drawScore() {
   ctx.fillText("Skóre: " + score, 20, 40);
 }
 
+function drawPlayer() {
+  // Emoji hráče
+  ctx.font = "30px Arial";
+  ctx.fillText("🧁", player.x, player.y + 25);
+
+  // Třpytky (náhodně kolem)
+  for (let i = 0; i < 3; i++) {
+    let sparkleX = player.x + Math.random() * 30;
+    let sparkleY = player.y + Math.random() * 30;
+    ctx.fillStyle = "#ffccff";
+    ctx.fillRect(sparkleX, sparkleY, 2, 2);
+  }
+}
+
+function drawGameOverScreen() {
+  ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = "#fff";
+  ctx.font = "40px Comic Sans MS";
+  ctx.fillText("Prohrála jsi 💔", 270, 180);
+  ctx.font = "24px Comic Sans MS";
+  ctx.fillText("Skóre: " + score, 340, 220);
+  ctx.fillText("Obnov stránku pro novou hru", 240, 260);
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  // Hráč
-  ctx.fillStyle = player.color;
-  ctx.fillRect(player.x, player.y, player.width, player.height);
+  drawPlayer();
 
-  // Překážky
   for (let i = 0; i < obstacles.length; i++) {
     drawHeart(obstacles[i].x + 5, obstacles[i].y);
   }
 
-  // Skóre
   drawScore();
+
+  if (gameOvered) {
+    drawGameOverScreen();
+  }
 }
 
+let gameLoopId;
 function gameLoop() {
-  frame++;
-  if (frame % 100 === 0) {
-    createObstacle();
-  }
+  if (!gameOvered) {
+    frame++;
+    if (frame % 100 === 0) {
+      createObstacle();
+    }
 
-  updatePlayer();
-  updateObstacles();
-  draw();
-  requestAnimationFrame(gameLoop);
+    updatePlayer();
+    updateObstacles();
+    draw();
+    gameLoopId = requestAnimationFrame(gameLoop);
+  }
+}
+
+function triggerGameOver() {
+  gameOvered = true;
 }
 
 document.addEventListener("keydown", function (e) {
   if (e.code === "Space" && player.grounded) {
     player.velocityY = -player.jumpForce;
+    jumpSound.play();
   }
 });
 
