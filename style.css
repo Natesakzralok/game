@@ -12,13 +12,12 @@ body {
   margin: 50px auto;
   position: relative;
   overflow: hidden;
-  background-image: url('https://example.com/girly-background.png'); /* Nahraď vlastním obrázkem */
-  background-size: cover;
+  background: linear-gradient(to top, #fff0f5, #ffe6f0);
 }
 
 #character {
-  width: 50px;
-  height: 50px;
+  width: 30px;
+  height: 30px;
   background-color: #ff66b2;
   position: absolute;
   bottom: 0;
@@ -26,19 +25,37 @@ body {
   border-radius: 50%;
 }
 
-#block {
-  width: 50px;
-  height: 50px;
-  background-color: #ff3399;
+.block {
   position: absolute;
   bottom: 0;
-  right: 0;
-  animation: blockMove 2s infinite linear;
+  background-color: #ff3399;
+  animation: blockMove 3s infinite linear;
+}
+
+.block1 {
+  width: 25px;
+  height: 35px;
+  left: 600px;
+  animation-delay: 0s;
+}
+
+.block2 {
+  width: 20px;
+  height: 50px;
+  left: 900px;
+  animation-delay: 1s;
+}
+
+.block3 {
+  width: 30px;
+  height: 40px;
+  left: 1200px;
+  animation-delay: 2s;
 }
 
 @keyframes blockMove {
-  0% { right: -50px; }
-  100% { right: 650px; }
+  0% { left: 600px; }
+  100% { left: -50px; }
 }
 
 .jump {
