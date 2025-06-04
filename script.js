@@ -14,7 +14,15 @@ const jumpSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/a
 const bgMusic = new Audio("https://cdn.pixabay.com/download/audio/2023/03/14/audio_e0e77d8919.mp3?filename=calm-piano-loop-141270.mp3");
 bgMusic.loop = true;
 bgMusic.volume = 0.3;
-bgMusic.play();
+
+// Spustit hudbu až po kliknutí
+let musicStarted = false;
+document.addEventListener("click", () => {
+  if (!musicStarted) {
+    bgMusic.play();
+    musicStarted = true;
+  }
+});
 
 toggleMusicBtn.onclick = () => {
   if (bgMusic.paused) {
@@ -115,11 +123,11 @@ function drawPlayer() {
   ctx.fillText(emoji, player.x, player.y + 25);
 
   // Třpytky
-  for (let i = 0; i < 3; i++) {
+  for (let i = 0; i < 5; i++) {
     let sparkleX = player.x + Math.random() * 30;
     let sparkleY = player.y + Math.random() * 30;
-    ctx.fillStyle = "#ffccff";
-    ctx.fillRect(sparkleX, sparkleY, 2, 2);
+    ctx.fillStyle = "#ffd9fa";
+    ctx.fillRect(sparkleX, sparkleY, 3, 3);
   }
 }
 
