@@ -1,0 +1,57 @@
+body {
+  font-family: 'Comic Sans MS', sans-serif;
+  text-align: center;
+  background: #c8f2ff;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #ff6f61;
+  margin-top: 20px;
+}
+
+.game {
+  width: 600px;
+  height: 200px;
+  margin: 20px auto;
+  position: relative;
+  background-color: #fff9f0;
+  overflow: hidden;
+  border: 3px solid #ff6f61;
+  border-radius: 10px;
+}
+
+#dog {
+  width: 50px;
+  position: absolute;
+  bottom: 0;
+  left: 50px;
+}
+
+#obstacle {
+  width: 40px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  animation: moveObstacle 2s linear infinite;
+}
+
+@keyframes moveObstacle {
+  0% {
+    right: -40px;
+  }
+  100% {
+    right: 600px;
+  }
+}
+
+.jump {
+  animation: jump 0.5s ease-out;
+}
+
+@keyframes jump {
+  0%   { bottom: 0; }
+  50%  { bottom: 80px; }
+  100% { bottom: 0; }
+}
