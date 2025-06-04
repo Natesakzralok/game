@@ -14,9 +14,7 @@ function jump() {
   }
 }
 
-document.addEventListener("keydown", () => {
-  jump();
-});
+document.addEventListener("keydown", jump);
 
 setInterval(() => {
   const characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
