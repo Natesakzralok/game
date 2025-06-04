@@ -1,35 +1,24 @@
-const player = document.getElementById("player");
-const obstacle = document.getElementById("obstacle");
-const scoreDisplay = document.getElementById("score");
-
-let score = 0;
-let jumping = false;
-
-document.addEventListener("keydown", (e) => {
-  if (e.code === "Space" && !jumping) {
-    jump();
-  }
-});
+const character = document.getElementById("character");
+const block = document.getElementById("block");
 
 function jump() {
-  jumping = true;
-  player.classList.add("jump");
-  setTimeout(() => {
-    player.classList.remove("jump");
-    jumping = false;
-  }, 400);
+  if (character.classList != "jump") {
+    character.classList.add("jump");
+    setTimeout(function () {
+      character.classList.remove("jump");
+    }, 500);
+  }
 }
 
-setInterval(() => {
-  let playerBottom = parseInt(window.getComputedStyle(player).getPropertyValue("bottom"));
-  let obstacleRight = parseInt(window.getComputedStyle(obstacle).getPropertyValue("right"));
+document.addEventListener("keydown", function (event) {
+  jump();
+});
 
-  if (obstacleRight > 500 && obstacleRight < 530 && playerBottom <= 30) {
-    alert("💥 Čenda narazil! Tvoje skóre: " + score);
-    score = 0;
-  } else {
-    score++;
+let checkDead = setInterval(function () {
+  let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
+  let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+
+  if (blockLeft < 100 && blockLeft > 0 && characterTop >= 130) {
+    alert("Konec hry! Zkus to znovu.");
   }
-
-  scoreDisplay.textContent = score;
-}, 100);
+}, 10);
