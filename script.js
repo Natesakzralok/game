@@ -1,33 +1,24 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
-const restartBtn = document.getElementById("restartBtn");
 
-let player;
+let player = {
+  x: 50,
+  y: 300,
+  width: 30,
+  height: 30,
+  velocityY: 0,
+  jumpForce: 12,
+  grounded: false
+};
+
 let gravity = 0.5;
 let obstacles = [];
 let frame = 0;
 let score = 0;
 let gameOvered = false;
 
+// Zvuk skoku
 const jumpSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_841174d841.mp3?filename=jump-144026.mp3");
-
-function resetGame() {
-  player = {
-    x: 50,
-    y: 300,
-    width: 30,
-    height: 30,
-    velocityY: 0,
-    jumpForce: 12,
-    grounded: false
-  };
-  obstacles = [];
-  frame = 0;
-  score = 0;
-  gameOvered = false;
-  restartBtn.style.display = "none";
-  gameLoop();
-}
 
 function drawHeart(x, y) {
   ctx.fillStyle = "#ff4da6";
@@ -91,20 +82,16 @@ function drawScore() {
 }
 
 function drawPlayer() {
-  // Emoji podle skóre
-  let emoji = "🧁";
-  if (score >= 10) emoji = "👑";
-  else if (score >= 5) emoji = "🍓";
-
+  // Emoji hráče
   ctx.font = "30px Arial";
-  ctx.fillText(emoji, player.x, player.y + 25);
+  ctx.fillText("🧁", player.x, player.y + 25);
 
-  // Třpytky
-  for (let i = 0; i < 5; i++) {
+  // Třpytky (náhodně kolem)
+  for (let i = 0; i < 3; i++) {
     let sparkleX = player.x + Math.random() * 30;
     let sparkleY = player.y + Math.random() * 30;
-    ctx.fillStyle = "#ffd9fa";
-    ctx.fillRect(sparkleX, sparkleY, 3, 3);
+    ctx.fillStyle = "#ffccff";
+    ctx.fillRect(sparkleX, sparkleY, 2, 2);
   }
 }
 
@@ -116,15 +103,18 @@ function drawGameOverScreen() {
   ctx.fillText("Prohrála jsi 💔", 270, 180);
   ctx.font = "24px Comic Sans MS";
   ctx.fillText("Skóre: " + score, 340, 220);
+  ctx.fillText("Obnov stránku pro novou hru", 240, 260);
 }
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   drawPlayer();
+
   for (let i = 0; i < obstacles.length; i++) {
     drawHeart(obstacles[i].x + 5, obstacles[i].y);
   }
+
   drawScore();
 
   if (gameOvered) {
@@ -149,18 +139,13 @@ function gameLoop() {
 
 function triggerGameOver() {
   gameOvered = true;
-  restartBtn.style.display = "inline-block";
 }
 
 document.addEventListener("keydown", function (e) {
-  if (e.code === "Space" && player.grounded && !gameOvered) {
+  if (e.code === "Space" && player.grounded) {
     player.velocityY = -player.jumpForce;
     jumpSound.play();
   }
 });
 
-restartBtn.onclick = () => {
-  resetGame();
-};
-
-resetGame();
+gameLoop();
