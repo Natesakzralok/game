@@ -1,5 +1,9 @@
 const character = document.getElementById("character");
-const blocks = [document.getElementById("block1"), document.getElementById("block2"), document.getElementById("block3")];
+const blocks = [
+  document.getElementById("block1"),
+  document.getElementById("block2"),
+  document.getElementById("block3")
+];
 
 function jump() {
   if (!character.classList.contains("jump")) {
@@ -22,9 +26,8 @@ setInterval(() => {
     const blockWidth = parseInt(window.getComputedStyle(block).getPropertyValue("width"));
     const blockHeight = parseInt(window.getComputedStyle(block).getPropertyValue("height"));
 
-    // Kolize nastane, když blok je blízko postavičce a postavička je nízko
-    if (blockLeft < 75 && blockLeft + blockWidth > 50 && characterBottom < blockHeight) {
-      alert("💥 Konec hry! Narazila jsi do překážky.");
+    if (blockLeft < 120 && blockLeft + blockWidth > 80 && characterBottom < blockHeight) {
+      alert("💥 Konec hry! Narazila jsi do srdíčka.");
     }
   });
 }, 10);
