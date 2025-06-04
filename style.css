@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #ffe6f0;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Comic Sans MS', cursive;
 }
 
 .game {
@@ -23,37 +23,35 @@ body {
   bottom: 0;
   left: 50px;
   border-radius: 50%;
+  z-index: 10;
 }
 
 .block {
   position: absolute;
   bottom: 0;
   background-color: #ff3399;
-  animation: blockMove 3s infinite linear;
+  animation: moveBlock 3s linear infinite;
 }
 
-.block1 {
+#block1 {
   width: 25px;
-  height: 35px;
-  left: 600px;
+  height: 40px;
   animation-delay: 0s;
 }
 
-.block2 {
+#block2 {
   width: 20px;
   height: 50px;
-  left: 900px;
   animation-delay: 1s;
 }
 
-.block3 {
+#block3 {
   width: 30px;
-  height: 40px;
-  left: 1200px;
+  height: 30px;
   animation-delay: 2s;
 }
 
-@keyframes blockMove {
+@keyframes moveBlock {
   0% { left: 600px; }
   100% { left: -50px; }
 }
