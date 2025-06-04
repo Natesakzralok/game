@@ -1,5 +1,5 @@
 const character = document.getElementById("character");
-const blocks = document.querySelectorAll(".block");
+const blocks = [document.getElementById("block1"), document.getElementById("block2"), document.getElementById("block3")];
 
 function jump() {
   if (!character.classList.contains("jump")) {
@@ -15,13 +15,13 @@ document.addEventListener("keydown", () => {
 });
 
 setInterval(() => {
-  blocks.forEach((block) => {
+  blocks.forEach(block => {
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
     let blockWidth = parseInt(window.getComputedStyle(block).getPropertyValue("width"));
 
     if (blockLeft < 80 && blockLeft > 20 && characterTop >= 130) {
-      alert("Konec hry! Zkus to znovu.");
+      alert("Konec hry! Narazila jsi do překážky.");
     }
   });
 }, 10);
