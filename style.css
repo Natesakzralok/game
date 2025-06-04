@@ -36,7 +36,7 @@ body {
 #block1 {
   width: 20px;
   height: 25px;
-  animation-delay: 1.5s; /* Posunutí do poloviny hry */
+  animation-delay: 1.5s;
 }
 
 #block2 {
@@ -62,6 +62,6 @@ body {
 
 @keyframes jump {
   0% { bottom: 0; }
-  50% { bottom: 90px; }
+  50% { bottom: 120px; } /* Výška skoku zvýšena */
   100% { bottom: 0; }
 }
