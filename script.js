@@ -1,7 +1,6 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const restartBtn = document.getElementById("restartBtn");
-const toggleMusicBtn = document.getElementById("toggleMusic");
 
 let player;
 let gravity = 0.5;
@@ -11,28 +10,6 @@ let score = 0;
 let gameOvered = false;
 
 const jumpSound = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_841174d841.mp3?filename=jump-144026.mp3");
-const bgMusic = new Audio("https://cdn.pixabay.com/download/audio/2023/03/14/audio_e0e77d8919.mp3?filename=calm-piano-loop-141270.mp3");
-bgMusic.loop = true;
-bgMusic.volume = 0.3;
-
-// Spustit hudbu až po kliknutí
-let musicStarted = false;
-document.addEventListener("click", () => {
-  if (!musicStarted) {
-    bgMusic.play();
-    musicStarted = true;
-  }
-});
-
-toggleMusicBtn.onclick = () => {
-  if (bgMusic.paused) {
-    bgMusic.play();
-    toggleMusicBtn.textContent = "🎶 Hudba: Zapnuto";
-  } else {
-    bgMusic.pause();
-    toggleMusicBtn.textContent = "🎶 Hudba: Vypnuto";
-  }
-};
 
 function resetGame() {
   player = {
