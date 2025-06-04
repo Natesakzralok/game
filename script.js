@@ -15,12 +15,16 @@ document.addEventListener("keydown", () => {
 });
 
 setInterval(() => {
-  blocks.forEach(block => {
-    let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
-    let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+  const characterBottom = parseInt(window.getComputedStyle(character).getPropertyValue("bottom"));
 
-    if (blockLeft < 75 && blockLeft > 25 && characterTop >= 130) {
-      alert("Konec hry! Narazila jsi do překážky.");
+  blocks.forEach(block => {
+    const blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
+    const blockWidth = parseInt(window.getComputedStyle(block).getPropertyValue("width"));
+    const blockHeight = parseInt(window.getComputedStyle(block).getPropertyValue("height"));
+
+    // Kolize nastane, když blok je blízko postavičce a postavička je nízko
+    if (blockLeft < 75 && blockLeft + blockWidth > 50 && characterBottom < blockHeight) {
+      alert("💥 Konec hry! Narazila jsi do překážky.");
     }
   });
 }, 10);
