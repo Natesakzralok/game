@@ -1,67 +1,17 @@
 body {
   margin: 0;
-  padding: 0;
+  font-family: "Comic Sans MS", cursive, sans-serif;
   background-color: #ffe6f0;
-  font-family: 'Comic Sans MS', cursive;
 }
 
-.game {
-  width: 100%;
-  max-width: 900px;
-  height: 300px;
-  border: 3px solid #ff99cc;
-  margin: 50px auto;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(to top, #fff0f5, #ffe6f0);
-  border-radius: 20px;
-  box-shadow: 0 0 20px #ffb6c1;
+.game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }
 
-#character {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  bottom: 0;
-  left: 80px;
-  border-radius: 50%;
-  z-index: 10;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Emoji_u1f60a.svg/48px-Emoji_u1f60a.svg.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
-
-.block {
-  position: absolute;
-  bottom: 0;
-  width: 35px;
-  height: 35px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation: moveBlock 4s linear infinite;
-}
-
-.heart {
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Emoji_u2764.svg/48px-Emoji_u2764.svg.png');
-}
-
-#block1 { animation-delay: 2s; }
-#block2 { animation-delay: 3.5s; }
-#block3 { animation-delay: 5s; }
-
-@keyframes moveBlock {
-  0% { left: 100%; }
-  100% { left: -50px; }
-}
-
-.jump {
-  animation: jump 0.5s;
-}
-
-@keyframes jump {
-  0% { bottom: 0; }
-  50% { bottom: 160px; }  /* výška skoku */
-  100% { bottom: 0; }
+canvas {
+  border: 4px solid #ff99cc;
+  background-color: #fff0f5;
 }
