@@ -24,7 +24,7 @@ setInterval(() => {
   let dogBottom = parseInt(window.getComputedStyle(dog).getPropertyValue("bottom"));
   let obstacleRight = parseInt(window.getComputedStyle(obstacle).getPropertyValue("right"));
 
-  if (obstacleRight > 550 && obstacleRight < 600 && dogBottom <= 30) {
+  if (obstacleRight > 500 && obstacleRight < 560 && dogBottom <= 40) {
     alert("💥 Čenda narazil! Tvoje skóre: " + score);
     score = 0;
   } else {
