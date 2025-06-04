@@ -6,8 +6,8 @@ body {
 }
 
 .game {
-  width: 90%;
-  max-width: 800px;
+  width: 100%;
+  max-width: 900px;
   height: 300px;
   border: 3px solid #ff99cc;
   margin: 50px auto;
@@ -35,18 +35,21 @@ body {
 .block {
   position: absolute;
   bottom: 0;
-  width: 30px;
-  height: 30px;
-  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Emoji_u2764.svg/48px-Emoji_u2764.svg.png');
+  width: 35px;
+  height: 35px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
   animation: moveBlock 4s linear infinite;
 }
 
-#block1 { animation-delay: 1.5s; }
-#block2 { animation-delay: 3s; }
-#block3 { animation-delay: 4.5s; }
+.heart {
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/29/Emoji_u2764.svg/48px-Emoji_u2764.svg.png');
+}
+
+#block1 { animation-delay: 2s; }
+#block2 { animation-delay: 3.5s; }
+#block3 { animation-delay: 5s; }
 
 @keyframes moveBlock {
   0% { left: 100%; }
@@ -59,6 +62,6 @@ body {
 
 @keyframes jump {
   0% { bottom: 0; }
-  50% { bottom: 150px; }
+  50% { bottom: 160px; }  /* výška skoku */
   100% { bottom: 0; }
 }
