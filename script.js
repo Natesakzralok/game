@@ -18,9 +18,8 @@ setInterval(() => {
   blocks.forEach(block => {
     let characterTop = parseInt(window.getComputedStyle(character).getPropertyValue("top"));
     let blockLeft = parseInt(window.getComputedStyle(block).getPropertyValue("left"));
-    let blockWidth = parseInt(window.getComputedStyle(block).getPropertyValue("width"));
 
-    if (blockLeft < 80 && blockLeft > 20 && characterTop >= 130) {
+    if (blockLeft < 75 && blockLeft > 25 && characterTop >= 130) {
       alert("Konec hry! Narazila jsi do překážky.");
     }
   });
